@@ -41,7 +41,7 @@ function getXMLRequest(url){
         }
     };
     xmlhttp.onerror = function(e){
-        showNotice("Error API.", "bg-error");
+        showNotice("Error API.", "bg-danger");
         hiddeLoading();
     };
     showLoading();
@@ -65,15 +65,15 @@ function print(){
         <th>Nombre</th>
         <th>Apariencia</th>
         <th>Biografía</th>
-        <th>Connecciones</th>
-        <th>Powerstats</th>
+        <th>Conexiones</th>
+        <th>Estadíscas de poder</th>
         <th>Trabajo</th>
         <th>Id</th>
         
     </tr>
     </thead>
     <tbody>`;
-    var heros = "";
+    var heroes = "";
     if (data.response === "error"){
         showNotice("No se encontraron resultados.", "bg-warning");
         clearNav();
@@ -85,12 +85,12 @@ function print(){
             max = data.results.length - 1;
         }
         setNavPages();
-        heros = getHeros(data, min, max);
+        heroes = getHeroes(data, min, max);
     }
-    table.innerHTML = data_head + heros + "</tbody>";
+    table.innerHTML = data_head + heroes + "</tbody>";
 }
 
-function getHeros(data, min, max){
+function getHeroes(data, min, max){
     var data_string = "";
     for(var i = min; i <= max; i++){
         data_string = data_string + "<tr>"

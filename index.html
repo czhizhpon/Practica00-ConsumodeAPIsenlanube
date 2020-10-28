@@ -12,22 +12,63 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/functions.js"></script>
+
 </head>
-<body>
-    <section class="container">
-        <h2>Buscar Heroes</h2>
-        <article class="container ">
-            <form class="main-form my-search-form">
+<body onresize="centerLoading()">
+    <div id="background" class="background-blur e_hidden"></div>
+    <div id="loading" class="e_hidden lds-ripple"><div></div><div></div></div>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand mb-0 h1" href="index.html">Buscar Heroes</a>
+        </nav>
+    </header>
+    <section class="container pt-3">
+        <article class="container bg-light pt-3">
+            <form class="main-form my-search-form" onsubmit="searchAHero(); return false">
+                <div id="main_notice" class="notice_container e_hidden">
+                    <div id="notice" class="div_notice"></div>
+                    <input type="button" onclick="hideNotice()">
+                </div>
+                <div class="clear-both"></div>
                 <div class="row justify-content-center aling-items-center">
-                    <label for="search-inp" class="col-form-label col-12 col-sm-3">Buscar Heroe:</label>
+                    <label for="search-heroe-input" class="col-form-label col-12 col-sm-3">Buscar Heroe:</label>
                     
-                    <input id="search-inp" name="search-inp" class="form-control col-11 col-sm-8" type="search" placeholder="Buscar..."
+                    <input id="search-heroe-input" name="search-heroe-input" class="form-control col-11 col-sm-8" type="search" placeholder="Buscar..."
                         aria-label="Search">
-                    <input type="button" class="search-icon btn col-1 col-sm-1">
-                    
+                    <input type="button" class="search-icon btn col-1 col-sm-1" onclick="searchAHero()">
                 </div>
             </form>
+            <br>
+            <div class="table-responsive">
+                <table id="hero-table" class="table table-striped table-bordered" >
+                    <thead class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>Apariencia</th>
+                            <th>Biografía</th>
+                            <th>Connecciones</th>
+                            <th>Powerstats</th>
+                            <th>Trabajo</th>
+                            <th>Id</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="container">
+                <nav class="nav-pages row justify-content-center">
+                    <div id="nav-pages-numbers"></div>
+                </nav>
+            </div>
         </article>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modal-img">
+            <div id="caption"></div>
+        </div>
     </section>
 </body>
 </html>

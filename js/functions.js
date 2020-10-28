@@ -137,4 +137,117 @@ function getHeros(data, min, max){
     return data_string;
 }
 
+function setNavPages(){
+    var pages = document.getElementById('nav-pages-numbers');
+    
+    var min = current_page[0];
+    var max;
+    var min_aux;
+    for (var i = current_page[0]; i >= current_page[0] - 2; i--){
+        min = i;
+        min_aux = i;
+        if (i < 0){
+            min = 0;
+        }
+    }
+    max = current_page[0] + 2;
+    if(min_aux < 0){
+        max  = max - min_aux;
+    }
+    if (max >= max_pages){
+        max = max_pages;
+        if (max - 4 >= 0){
+            min = max - 4;
+        }else if(max - 3 >= 0){
+            min = max - 3;
+        }
+    }
+    current_page[1] = min;
+    current_page[2] = max;
+    var nav_html = "";
+    if (current_page[0] === 0){
+        nav_html = '<a href="#" class="isDisabled bg-primary" onclick="return false;">&laquo;</a>';
+    }else{
+        nav_html = '<a href="#" class="bg-primary" onclick="setPageLeft()">&laquo;</a>';
+    }
+    for (var i = current_page[1]; i <= current_page[2]; i++){
+        if (current_page[0] === i){
+            nav_html = nav_html + "<a class='bg-secondary' onclick='setPage(" + i + ")' href='#'>" + i + "</a>"
+        }else{
+            nav_html = nav_html + "<a class='bg-primary' onclick='setPage(" + i + ")' href='#'>" + i + "</a>"
+        }
+    }
+    if(current_page[0] === max_pages){
+        nav_html = nav_html + '<a href="#" class="isDisabled bg-primary" onclick="return false;">&raquo;</a>';
+    }else{
+        nav_html = nav_html + '<a href="#" class="bg-primary" onclick="setPageRight()">&raquo;</a>';
+    }
+    pages.innerHTML = nav_html;
+}
 
+function clearNav(){
+    document.getElementById('nav-pages-numbers').innerHTML = "";
+}
+
+function setPage(n){
+    current_page[0] = n;
+    print(data);
+    return false;
+}
+
+function setPageLeft(){
+    var min = current_page[0] - 1;
+    if (min <= 0){
+        current_page[0] = 0;
+    }else{
+        current_page[0] = min;
+    }
+    print(data);
+    return false;
+}
+
+function setPageRight(){
+    var max = current_page[0] + 1;
+    if(max >= max_pages){
+        current_page[0] = max_pages;
+    }else{
+        current_page[0] = max;
+    }
+    print(data);
+    return false;
+}
+
+function showLoading(){
+    centerLoading();
+    document.getElementById("loading").classList.remove("e_hidden");
+    document.getElementById("background").classList.remove("e_hidden");
+}
+
+function hiddeLoading(){
+    document.getElementById("loading").classList.add("e_hidden");
+    document.getElementById("background").classList.add("e_hidden");
+}
+
+function centerLoading(){
+    var loading = document.getElementById("loading");
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+
+    loading.style.left = ((w/2) - 40) + "px";
+    loading.style.top = ((h/2) - 40) + "px";
+}
+
+function openModal(img_src, alt_text){
+    var modalImg = document.getElementById("modal-img");
+    var captionText = document.getElementById("caption");
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+    modalImg.src = img_src;
+    captionText.innerHTML = alt_text;
+    return false;
+}
+
+function closeModal(){
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}

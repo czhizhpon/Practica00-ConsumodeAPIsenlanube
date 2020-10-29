@@ -58,7 +58,7 @@ Para mayor legibilidad de la información, y para que no abunde o cause confusi�
 
 <img src="img/readme/4.png" alt="4"> 
 
-- Por último, la interfaz gráfica de aplicada debe ser intuitiva y sencilla aplicando conceptos de experiencia de usuario.
+- Por último, la interfaz gráfica aplicada debe ser intuitiva y sencilla aplicando conceptos de experiencia de usuario.
 
 Se optó por usar colores claros para dar mayor realce a la información y mejorar la experiencia de usuario con los puntos anteriores explicados.
 

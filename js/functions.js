@@ -84,6 +84,7 @@ function print(){
             max = data.results.length - 1;
         }
         setNavPages();
+        setPagesInfo()
         heroes = getHeroes(data, min, max);
     }
     table.innerHTML = data_head + heroes + "</tbody>";
@@ -158,6 +159,10 @@ function isFielNull(s){
     return s;
 }
 
+function setPagesInfo(){
+    document.getElementById("page-info").innerHTML = (current_page[0] + 1) + " de " + (max_pages + 1) + " páginas";
+}
+
 function setNavPages(){
     var pages = document.getElementById('nav-pages-numbers');
     
@@ -193,9 +198,9 @@ function setNavPages(){
     }
     for (var i = current_page[1]; i <= current_page[2]; i++){
         if (current_page[0] === i){
-            nav_html = nav_html + "<a class='bg-secondary' onclick='setPage(" + i + ")' href='#'>" + i + "</a>"
+            nav_html = nav_html + "<a class='bg-secondary' onclick='setPage(" + i + ")' href='#'>" + (i + 1) + "</a>"
         }else{
-            nav_html = nav_html + "<a class='bg-primary' onclick='setPage(" + i + ")' href='#'>" + i + "</a>"
+            nav_html = nav_html + "<a class='bg-primary' onclick='setPage(" + i + ")' href='#'>" + (i + 1) + "</a>"
         }
     }
     if(current_page[0] === max_pages){

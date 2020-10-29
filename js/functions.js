@@ -51,25 +51,24 @@ function getXMLRequest(url){
 function searchAHero(){
     hideNotice();
     var heroName = document.getElementById("search-heroe-input").value;
-    if (!isEmpty(heroName, "Ingrese el nombre de un Superheroe.")){
+    if (!isEmpty(heroName, "Ingrese el nombre de un Personaje de comics.")){
         getXMLRequest("https://superheroapi.com/api/779585992607585/search/" + heroName);
     }
 }
 
 function print(){
-    // console.log(data);
+    console.log(data);
     var table = document.getElementById("hero-table");
     var data_head = `<thead class="thead-dark">
     <tr>
         <th></th>
-        <th>Nombre</th>
+        <th style="width:200px">Nombre</th>
         <th>Apariencia</th>
-        <th>Biografía</th>
+        <th style="width:400px">Biografía</th>
         <th>Conexiones</th>
         <th>Estadíscas de poder</th>
         <th>Trabajo</th>
         <th>Id</th>
-        
     </tr>
     </thead>
     <tbody>`;
@@ -101,32 +100,34 @@ function getHeroes(data, min, max){
             + " </td>" 
             + " <td>" + data.results[i]['name'] + " </td>" 
             + " <td>" 
-                + "<strong>Género: </strong>" + data.results[i].appearance.gender + "<br>"
-                + "<strong>Raza: </strong>" + data.results[i].appearance.race + "<br>"
-                + "<strong>Altura: </strong>" + data.results[i].appearance.height['1'] + "<br>"
-                + "<strong>Peso: </strong>" + data.results[i].appearance.weight['0'] + "<br>" 
+                + "<strong>Género: </strong>" + "<br>" + isFielNull(data.results[i].appearance.gender) + "<br>" + "<br>"
+                + "<strong>Raza: </strong>" + "<br>" + isFielNull(data.results[i].appearance.race) + "<br>" + "<br>"
+                + "<strong>Altura: </strong>" + "<br>" + isFielNull(data.results[i].appearance.height['1']) + "<br>" + "<br>"
+                + "<strong>Peso: </strong>" + "<br>" + isFielNull(data.results[i].appearance.weight['0'])
             + " </td>"
             + " <td>" 
-                + "<strong>Nombre Completo: </strong>" + data.results[i].biography['full-name'] + "<br>"
-                + "<strong>Primera aparición: </strong>" + data.results[i].biography['first-appearance'] + "<br>"
-                + "<strong>Lugar de nacimiento: </strong>" + data.results[i].biography['place-of-birth'] + "<br>"
-                + "<strong>Publicador: </strong>" + data.results[i].biography['publisher'] + "<br>"
+                + "<strong>Nombre Completo: </strong>" + "<br>" + isFielNull(data.results[i].biography['full-name']) + "<br>" + "<br>"
+                + "<strong>Primera aparición: </strong>" + "<br>" + isFielNull(data.results[i].biography['first-appearance']) + "<br>" + "<br>"
+                + "<strong>Lugar de nacimiento: </strong>" + "<br>" + isFielNull(data.results[i].biography['place-of-birth']) + "<br>" + "<br>"
+                + "<strong>Publicador: </strong>" + "<br>" + isFielNull(data.results[i].biography['publisher']) + "<br>" + "<br>"
+                + "<strong>Alineación: </strong>" + "<br>" + isFielNull(data.results[i].biography['alignment']) + "<br>" + "<br>"
+                + "<strong>Alias: </strong>" + "<br>" + getAliases(data.results[i].biography['aliases'])
             + " </td>"
             + " <td>" 
-                + "<strong>Grupo/Afiliación: </strong>" + data.results[i].connections['group-affiliation'] + "<br>"
+                + "<strong>Grupo/Afiliación: </strong>" + "<br>" + isFielNull(data.results[i].connections['group-affiliation'])
                 // + "Familiares: " + data.results[i].connections['relatives'] + "<br>"  
             + " </td>"
             + " <td>" 
-                + "<strong>Combate: </strong>" + data.results[i].powerstats['combat'] + "<br>"
-                + "<strong>Durabilidad: </strong>" + data.results[i].powerstats['durability'] + "<br>"
-                + "<strong>Inteligencia: </strong>" + data.results[i].powerstats['intelligence'] + "<br>"
-                + "<strong>Poder: </strong>" + data.results[i].powerstats['power'] + "<br>"
-                + "<strong>Velocidad: </strong>" + data.results[i].powerstats['speed'] + "<br>"
-                + "<strong>Fuerza: </strong>" + data.results[i].powerstats['strength'] + "<br>"
+                + "<strong>Combate: </strong>" + "<br>" + isFielNull(data.results[i].powerstats['combat']) + "<br>" + "<br>"
+                + "<strong>Durabilidad: </strong>" + "<br>" + isFielNull(data.results[i].powerstats['durability']) + "<br>" + "<br>"
+                + "<strong>Inteligencia: </strong>" + "<br>" + isFielNull(data.results[i].powerstats['intelligence']) + "<br>" + "<br>"
+                + "<strong>Poder: </strong>" + "<br>" + isFielNull(data.results[i].powerstats['power']) + "<br>" + "<br>"
+                + "<strong>Velocidad: </strong>" + "<br>" + isFielNull(data.results[i].powerstats['speed']) + "<br>" + "<br>"
+                + "<strong>Fuerza: </strong>" + "<br>" + isFielNull(data.results[i].powerstats['strength'])
             + " </td>"
             + " <td>" 
-                + "<strong>Base: </strong>" + data.results[i].work['base'] + "<br>"
-                + "<strong>Ocupación: </strong>" + data.results[i].work['occupation'] + "<br>"
+                + "<strong>Base: </strong>" + "<br>" + isFielNull(data.results[i].work['base']) + "<br>" + "<br>"
+                + "<strong>Ocupación: </strong>" + "<br>" + isFielNull(data.results[i].work['occupation'])
             + " </td>"
             + " <td>" 
                 + data.results[i].id 
@@ -135,6 +136,26 @@ function getHeroes(data, min, max){
             + "</tr>";
     }
     return data_string;
+}
+
+function getAliases(data_aliases){
+    var aliases = "";
+    var n = data_aliases.length;
+    if (n===0){
+        aliases = "Desconocido"
+    } else{
+        for (var j = 0; j < n; j++){
+            aliases = aliases + "[" + j + "] " + data_aliases[j] + "<br>";
+        }
+    }
+    return aliases;
+}
+
+function isFielNull(s){
+    if (s === "null"){
+        return " - ";
+    }
+    return s;
 }
 
 function setNavPages(){

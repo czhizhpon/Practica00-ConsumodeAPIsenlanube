@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busacar Heroes</title>
+    <title>Personajes</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -20,11 +20,11 @@
     <div id="loading" class="e_hidden lds-ripple"><div></div><div></div></div>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand mb-0 h1" href="index.html">Buscar Heore</a>
+            <a class="navbar-brand mb-0 h1" href="index.html">Buscar Personajes de Comics</a>
         </nav>
     </header>
-    <section class="container pt-3">
-        <article class="container bg-light pt-3">
+    <section class="container-xl pt-3">
+        <article class="container-fluid bg-light pt-3">
             <form class="main-form my-search-form" onsubmit="searchAHero(); return false">
                 <div id="main_notice" class="notice_container e_hidden">
                     <div id="notice" class="div_notice"></div>
@@ -32,9 +32,9 @@
                 </div>
                 <div class="clear-both"></div>
                 <div class="row justify-content-center aling-items-center">
-                    <label for="search-heroe-input" class="col-form-label col-12 col-sm-3">Buscar Heroe:</label>
+                    <label for="search-heroe-input" class="col-form-label col-12 col-sm-4">Buscar personaje:</label>
                     
-                    <input id="search-heroe-input" name="search-heroe-input" class="form-control col-11 col-sm-8" type="search" placeholder="Buscar..."
+                    <input id="search-heroe-input" name="search-heroe-input" class="form-control col-11 col-sm-7" type="search" placeholder="Ingresar nombre..."
                         aria-label="Search">
                     <input type="button" class="search-icon btn col-1 col-sm-1" onclick="searchAHero()">
                 </div>
